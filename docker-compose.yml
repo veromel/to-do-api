@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: todo-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - TODO_DATABASE_URL=sqlite+aiosqlite:///./todo_api.db
+      - TODO_SECRET_KEY=supersecretkey
+      - TODO_ALGORITHM=HS256
+      - TODO_ACCESS_TOKEN_EXPIRE_MINUTES=30
+      - TODO_DEBUG=True
+      - TODO_API_V1_STR=/api
+      - PYTHONPATH=/app
+    command: uvicorn apps.http.main:create_app --host 0.0.0.0 --port 8000 --reload --factory 

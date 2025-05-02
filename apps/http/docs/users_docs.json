@@ -1,0 +1,174 @@
+{
+  "create_user": {
+    "summary": "Crear usuario",
+    "description": "Registra un nuevo usuario en el sistema con nombre de usuario, correo electrónico y contraseña.",
+    "responses": {
+      "201": {
+        "description": "Usuario creado exitosamente",
+        "content": {
+          "application/json": {
+            "example": {
+              "id": 1,
+              "username": "usuario_ejemplo",
+              "email": "usuario@ejemplo.com",
+              "created_at": "2023-11-01T10:00:00",
+              "updated_at": "2023-11-01T10:00:00"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Datos de entrada inválidos",
+        "content": {
+          "application/json": {
+            "example": {
+              "detail": "Ya existe un usuario con el email usuario@ejemplo.com"
+            }
+          }
+        }
+      }
+    }
+  },
+  "get_current_user_info": {
+    "summary": "Obtener usuario actual",
+    "description": "Devuelve la información del usuario autenticado actualmente.",
+    "responses": {
+      "200": {
+        "description": "Información del usuario obtenida exitosamente",
+        "content": {
+          "application/json": {
+            "example": {
+              "id": 1,
+              "username": "usuario_ejemplo",
+              "email": "usuario@ejemplo.com",
+              "created_at": "2023-11-01T10:00:00",
+              "updated_at": "2023-11-01T10:00:00"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "No autenticado"
+      }
+    }
+  },
+  "get_users": {
+    "summary": "Listar usuarios",
+    "description": "Obtiene una lista paginada de usuarios registrados en el sistema.",
+    "responses": {
+      "200": {
+        "description": "Lista de usuarios obtenida exitosamente",
+        "content": {
+          "application/json": {
+            "example": {
+              "total": 2,
+              "items": [
+                {
+                  "id": 1,
+                  "username": "usuario_ejemplo",
+                  "email": "usuario@ejemplo.com",
+                  "created_at": "2023-11-01T10:00:00",
+                  "updated_at": "2023-11-01T10:00:00"
+                },
+                {
+                  "id": 2,
+                  "username": "otro_usuario",
+                  "email": "otro@ejemplo.com",
+                  "created_at": "2023-11-02T14:30:00",
+                  "updated_at": "2023-11-02T14:30:00"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "No autenticado"
+      }
+    }
+  },
+  "get_user": {
+    "summary": "Obtener usuario por ID",
+    "description": "Obtiene información detallada de un usuario específico por su ID.",
+    "responses": {
+      "200": {
+        "description": "Usuario encontrado",
+        "content": {
+          "application/json": {
+            "example": {
+              "id": 1,
+              "username": "usuario_ejemplo",
+              "email": "usuario@ejemplo.com",
+              "created_at": "2023-11-01T10:00:00",
+              "updated_at": "2023-11-01T10:00:00"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Usuario no encontrado",
+        "content": {
+          "application/json": {
+            "example": {
+              "detail": "Usuario con ID 123 no encontrado"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "No autenticado"
+      }
+    }
+  },
+  "update_current_user": {
+    "summary": "Actualizar mi perfil",
+    "description": "Actualiza los datos del usuario autenticado. Se pueden modificar el nombre de usuario, correo electrónico y/o contraseña.",
+    "responses": {
+      "200": {
+        "description": "Usuario actualizado exitosamente",
+        "content": {
+          "application/json": {
+            "example": {
+              "id": 1,
+              "username": "usuario_actualizado",
+              "email": "nuevo@ejemplo.com",
+              "created_at": "2023-11-01T10:00:00",
+              "updated_at": "2023-11-10T15:20:00"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Datos de entrada inválidos",
+        "content": {
+          "application/json": {
+            "example": {
+              "detail": "Ya existe un usuario con el email nuevo@ejemplo.com"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "No autenticado"
+      }
+    }
+  },
+  "delete_current_user": {
+    "summary": "Eliminar mi cuenta",
+    "description": "Elimina la cuenta del usuario autenticado actualmente.",
+    "responses": {
+      "204": {
+        "description": "Usuario eliminado exitosamente"
+      },
+      "400": {
+        "description": "Error en la solicitud"
+      },
+      "401": {
+        "description": "No autenticado"
+      },
+      "404": {
+        "description": "Error al eliminar el usuario"
+      }
+    }
+  }
+} 

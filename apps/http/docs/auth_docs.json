@@ -1,0 +1,29 @@
+{
+  "login_for_access_token": {
+    "summary": "Obtener token de acceso",
+    "description": "Autentica un usuario mediante nombre de usuario y contraseña, y devuelve un token JWT para acceder a los endpoints protegidos.",
+    "responses": {
+      "200": {
+        "description": "Autenticación exitosa",
+        "content": {
+          "application/json": {
+            "example": {
+              "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+              "token_type": "bearer"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Credenciales inválidas",
+        "content": {
+          "application/json": {
+            "example": {
+              "detail": "Usuario o contraseña incorrectos"
+            }
+          }
+        }
+      }
+    }
+  }
+} 

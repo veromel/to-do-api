@@ -1,0 +1,200 @@
+{
+  "create_task": {
+    "summary": "Crear nueva tarea",
+    "description": "Crea una nueva tarea para el usuario autenticado. La tarea debe tener al menos un título y opcionalmente puede incluir descripción, estado y fecha de vencimiento. El estado por defecto es PENDIENTE.",
+    "responses": {
+      "201": {
+        "description": "Tarea creada exitosamente",
+        "content": {
+          "application/json": {
+            "example": {
+              "id": 1,
+              "title": "Completar informe",
+              "description": "Finalizar el informe trimestral",
+              "status": "PENDING",
+              "due_date": "2023-12-31T23:59:59",
+              "user_id": 1,
+              "created_at": "2023-11-01T14:30:00",
+              "updated_at": "2023-11-01T14:30:00"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Datos de entrada inválidos",
+        "content": {
+          "application/json": {
+            "example": {
+              "detail": "La fecha de vencimiento no puede ser en el pasado para tareas no completadas"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "No autenticado"
+      }
+    }
+  },
+  "get_tasks": {
+    "summary": "Listar mis tareas",
+    "description": "Obtiene la lista de tareas del usuario autenticado. Permite filtrar por estado y rango de fechas de vencimiento. Los resultados se pueden paginar usando los parámetros skip y limit.",
+    "responses": {
+      "200": {
+        "description": "Lista de tareas obtenida exitosamente",
+        "content": {
+          "application/json": {
+            "example": {
+              "total": 2,
+              "items": [
+                {
+                  "id": 1,
+                  "title": "Completar informe",
+                  "description": "Finalizar el informe trimestral",
+                  "status": "PENDING",
+                  "due_date": "2023-12-31T23:59:59",
+                  "user_id": 1,
+                  "created_at": "2023-11-01T14:30:00",
+                  "updated_at": "2023-11-01T14:30:00"
+                },
+                {
+                  "id": 2,
+                  "title": "Reunión de equipo",
+                  "description": "Preparar agenda para la reunión",
+                  "status": "COMPLETED",
+                  "due_date": null,
+                  "user_id": 1,
+                  "created_at": "2023-10-28T10:00:00",
+                  "updated_at": "2023-10-29T15:30:00"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "No autenticado"
+      }
+    }
+  },
+  "get_task": {
+    "summary": "Obtener tarea por ID",
+    "description": "Obtiene una tarea específica que pertenezca al usuario autenticado.",
+    "responses": {
+      "200": {
+        "description": "Tarea encontrada",
+        "content": {
+          "application/json": {
+            "example": {
+              "id": 1,
+              "title": "Completar informe",
+              "description": "Finalizar el informe trimestral",
+              "status": "PENDING",
+              "due_date": "2023-12-31T23:59:59",
+              "user_id": 1,
+              "created_at": "2023-11-01T14:30:00",
+              "updated_at": "2023-11-01T14:30:00"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Tarea no encontrada o no pertenece al usuario",
+        "content": {
+          "application/json": {
+            "example": {
+              "detail": "Tarea con ID 1 no encontrada"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "No autenticado"
+      }
+    }
+  },
+  "update_task": {
+    "summary": "Actualizar tarea",
+    "description": "Actualiza los datos de una tarea específica que pertenezca al usuario autenticado. Se pueden actualizar uno o varios campos: título, descripción, estado y fecha de vencimiento.",
+    "responses": {
+      "200": {
+        "description": "Tarea actualizada exitosamente",
+        "content": {
+          "application/json": {
+            "example": {
+              "id": 1,
+              "title": "Completar informe (actualizado)",
+              "description": "Finalizar el informe trimestral con las nuevas métricas",
+              "status": "IN_PROGRESS",
+              "due_date": "2024-01-15T23:59:59",
+              "user_id": 1,
+              "created_at": "2023-11-01T14:30:00",
+              "updated_at": "2023-11-10T09:45:00"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Datos de entrada inválidos"
+      },
+      "404": {
+        "description": "Tarea no encontrada o no pertenece al usuario"
+      },
+      "401": {
+        "description": "No autenticado"
+      }
+    }
+  },
+  "update_task_status": {
+    "summary": "Actualizar estado de tarea",
+    "description": "Actualiza únicamente el estado de una tarea que pertenezca al usuario autenticado.",
+    "responses": {
+      "200": {
+        "description": "Estado de tarea actualizado exitosamente",
+        "content": {
+          "application/json": {
+            "example": {
+              "id": 1,
+              "title": "Completar informe",
+              "description": "Finalizar el informe trimestral",
+              "status": "COMPLETED",
+              "due_date": "2023-12-31T23:59:59",
+              "user_id": 1,
+              "created_at": "2023-11-01T14:30:00",
+              "updated_at": "2023-11-15T16:20:00"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Estado inválido"
+      },
+      "404": {
+        "description": "Tarea no encontrada o no pertenece al usuario"
+      },
+      "401": {
+        "description": "No autenticado"
+      }
+    }
+  },
+  "delete_task": {
+    "summary": "Eliminar tarea",
+    "description": "Elimina una tarea específica que pertenezca al usuario autenticado.",
+    "responses": {
+      "204": {
+        "description": "Tarea eliminada exitosamente"
+      },
+      "400": {
+        "description": "Error en la solicitud"
+      },
+      "404": {
+        "description": "Tarea no encontrada o no pertenece al usuario"
+      },
+      "401": {
+        "description": "No autenticado"
+      },
+      "500": {
+        "description": "Error interno del servidor"
+      }
+    }
+  }
+} 
