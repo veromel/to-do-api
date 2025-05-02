@@ -2,6 +2,10 @@
 
 API REST para gestionar una lista de tareas por usuario implementada con FastAPI, SQLAlchemy y arquitectura hexagonal.
 
+## Repositorio
+
+[GitHub: https://github.com/veromel/to-do-api](https://github.com/veromel/to-do-api)
+
 ## Índice
 1. [✨ Características](#características)
 2. [🏗️ Arquitectura](#arquitectura)
@@ -95,7 +99,7 @@ La aplicación está configurada para ejecutarse mediante Docker, lo que garanti
 1. Clona el repositorio:
 
 ```bash
-git clone https://github.com/tu-usuario/to-do-api.git
+git clone https://github.com/veromel/to-do-api.git
 cd to_do_api
 ```
 
